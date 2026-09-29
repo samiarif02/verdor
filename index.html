@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VERDOR — Single-Estate Olive Oil</title>
+  <meta name="description" content="VERDOR is a single-estate, cold-pressed olive oil from one Andalusian grove. Pressed within four hours of harvest." />
+  <meta name="theme-color" content="#10150c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VERDOR — The grove, bottled." />
+  <meta property="og:description" content="Single-estate, cold-pressed olive oil. Pressed within four hours of harvest." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=1200&auto=format&fit=crop" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fx.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <!-- PRELOADER -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__brand" data-loader-fade>VERDOR</div>
+    <div class="loader__row" data-loader-fade><span class="mono">Pressing the first harvest</span><span class="mono loader__num" data-num>000</span></div>
+    <div class="loader__bar"><i data-bar></i></div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top">VERDOR</a>
+    <nav class="nav__links mono">
+      <a href="#grove">The Grove</a>
+      <a href="#harvest">Harvest</a>
+      <a href="#pour">The Pour</a>
+      <a href="#shop">Shop</a>
+    </nav>
+    <a class="nav__cta mono" href="#shop" data-magnetic>Reserve 2026 →</a>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO (3D bottle lives in #gl) -->
+    <section class="hero" id="hero">
+      <div class="hero__copy">
+        <p class="hero__eyebrow mono" data-hero>Single estate · Cold-pressed · Unfiltered</p>
+        <h1 class="hero__title" id="heroTitle"><span class="line">The grove,</span><span class="line"><em>bottled.</em></span></h1>
+        <p class="hero__sub" data-hero>One hillside in Andalucía. One harvest a year. Olives pressed within four hours of leaving the branch — nothing added, nothing taken away.</p>
+        <div class="hero__ctas" data-hero>
+          <a class="btn btn--gold" href="#shop" data-magnetic>Reserve a bottle</a>
+          <a class="hero__link mono" href="#grove">Walk the grove →</a>
+        </div>
+      </div>
+
+      <div class="hero__badge" data-hero aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
+          <text><textPath href="#circ">COLD-PRESSED · FIRST HARVEST · 2026 · </textPath></text>
+        </svg>
+        <span class="hero__badge-dot"></span>
+      </div>
+
+      <div class="hero__meta mono" data-hero>
+        <span>Harvest 2026</span>
+        <span>Picual · Early harvest</span>
+      </div>
+      <div class="hero__scroll mono" data-hero><span>Scroll</span><i></i></div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee">
+        <span>First harvest</span><i>✦</i><span>Cold-pressed</span><i>✦</i><span>Unfiltered</span><i>✦</i><span>Single estate</span><i>✦</i>
+        <span>First harvest</span><i>✦</i><span>Cold-pressed</span><i>✦</i><span>Unfiltered</span><i>✦</i><span>Single estate</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- 01 THE GROVE -->
+    <section class="chapter chapter--photo" id="grove">
+      <figure class="chapter__media" data-parallax="26" data-clip>
+        <img src="https://images.unsplash.com/photo-1618100790047-3da47dcd5727?q=80&w=1800&auto=format&fit=crop" alt="Olive branches heavy with fruit at golden hour" loading="lazy" />
+      </figure>
+      <div class="chapter__copy">
+        <p class="chapter__num mono" data-scramble>01 — The grove</p>
+        <h2 data-split><span class="line">Two hundred trees.</span><span class="line"><em>One family.</em></span></h2>
+        <p data-reveal>The estate sits on a south-facing slope where the picual olive has grown for four generations. We never blend, never buy in fruit. If the hillside has a bad year, so do we.</p>
+      </div>
+    </section>
+
+    <!-- 02 FOUR HOURS -->
+    <section class="chapter chapter--dark" id="hours">
+      <p class="chapter__num mono" data-scramble>02 — The race</p>
+      <div class="hours__big"><span class="count" data-count="4">0</span><em>hours</em></div>
+      <div class="hours__clock" aria-hidden="true"><i id="clockHand"></i></div>
+      <p class="hours__note" data-reveal>That's the longest an olive waits between branch and press. Oxidation starts the moment fruit is picked — so the mill sits in the middle of the grove, and harvest days end at the press, not the truck.</p>
+    </section>
+
+    <!-- 03 HARVEST (pinned horizontal) -->
+    <section class="harvest" id="harvest">
+      <div class="harvest__pin" id="harvestPin">
+        <div class="harvest__head">
+          <p class="chapter__num mono" data-scramble>03 — The harvest</p>
+          <h2 data-split><span class="line">Eleven weeks,</span><span class="line"><em>by hand.</em></span></h2>
+        </div>
+        <div class="harvest__track" id="harvestTrack">
+          <figure class="hcard" data-cursor="Drag">
+            <div class="hcard__img"><img src="https://images.unsplash.com/photo-1663178405985-25074d8e72f4?q=80&w=1200&auto=format&fit=crop" alt="Olives resting on harvest nets" loading="lazy" /></div>
+            <figcaption><span class="mono">Wk 01 · October</span><h3>The nets go down</h3></figcaption>
+          </figure>
+          <figure class="hcard" data-cursor="Drag">
+            <div class="hcard__img"><img src="https://images.unsplash.com/photo-1753703986291-6f95a7f299ba?q=80&w=1200&auto=format&fit=crop" alt="Hands sorting olives into a crate" loading="lazy" /></div>
+            <figcaption><span class="mono">Wk 03 · November</span><h3>Picked, sorted, counted</h3></figcaption>
+          </figure>
+          <figure class="hcard" data-cursor="Drag">
+            <div class="hcard__img"><img src="https://images.unsplash.com/photo-1634657443172-efbae44fd04b?q=80&w=1200&auto=format&fit=crop" alt="Green and violet olives together" loading="lazy" /></div>
+            <figcaption><span class="mono">Wk 06 · November</span><h3>Green turns violet</h3></figcaption>
+          </figure>
+          <figure class="hcard" data-cursor="Drag">
+            <div class="hcard__img"><img src="https://images.unsplash.com/photo-1571139587318-bbb3f0ff433e?q=80&w=1200&auto=format&fit=crop" alt="Olive branches with fruit" loading="lazy" /></div>
+            <figcaption><span class="mono">Wk 09 · December</span><h3>The last branches</h3></figcaption>
+          </figure>
+          <figure class="hcard" data-cursor="Drag">
+            <div class="hcard__img"><img src="https://images.unsplash.com/photo-1697829234209-5497520a9fc6?q=80&w=1200&auto=format&fit=crop" alt="Olive grove under a clear winter sky" loading="lazy" /></div>
+            <figcaption><span class="mono">Wk 11 · January</span><h3>The grove rests</h3></figcaption>
+          </figure>
+        </div>
+        <div class="harvest__bar"><i id="harvestBar"></i></div>
+      </div>
+    </section>
+
+    <!-- 04 THE PRESS -->
+    <section class="chapter chapter--photo chapter--flip" id="press">
+      <figure class="chapter__media" data-parallax="26" data-clip>
+        <img src="https://images.unsplash.com/photo-1572777856134-4e658bbf3b78?q=80&w=1600&auto=format&fit=crop" alt="Fresh green olives just before pressing" loading="lazy" />
+      </figure>
+      <div class="chapter__copy">
+        <p class="chapter__num mono" data-scramble>04 — The press</p>
+        <h2 data-split><span class="line">Cold. Slow.</span><span class="line"><em>Stubborn.</em></span></h2>
+        <p data-reveal>Granite wheels and patience, under 27°C, always. Yields drop by a third compared to heat extraction. Everything worth tasting stays in the bottle instead.</p>
+      </div>
+    </section>
+
+    <!-- 05 THE POUR (pinned; bottle + stream rendered in #gl) -->
+    <section class="pour" id="pour">
+      <div class="pour__pin" id="pourPin">
+        <div class="pour__stage">
+          <div class="pour__space" aria-hidden="true"></div>
+          <div class="pour__copy">
+            <p class="chapter__num mono" data-scramble>05 — The pour</p>
+            <h2 class="pour__title"><span class="line">Green gold,</span><span class="line"><em>by the spoonful.</em></span></h2>
+            <div class="pour__stats">
+              <div><b id="pourPct">0</b><span class="mono">% poured</span></div>
+              <div><b>0.2</b><span class="mono">acidity %</span></div>
+              <div><b>612</b><span class="mono">polyphenols mg/kg</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 TASTE -->
+    <section class="taste" id="taste">
+      <p class="chapter__num mono" data-scramble>06 — On the tongue</p>
+      <h2 data-split><span class="line">Tasting notes</span></h2>
+      <div class="taste__grid">
+        <article class="note" data-reveal data-tilt><span class="note__n mono">i.</span><span class="mono">Nose</span><h3>Cut grass</h3><p>Fresh, green, almost sharp — the smell of the grove at 7am on harvest day.</p></article>
+        <article class="note" data-reveal data-tilt><span class="note__n mono">ii.</span><span class="mono">Palate</span><h3>Green apple</h3><p>Bright fruit up front, a soft bitterness underneath. Artichoke, if you go looking.</p></article>
+        <article class="note" data-reveal data-tilt><span class="note__n mono">iii.</span><span class="mono">Finish</span><h3>Black pepper</h3><p>The peppery catch at the back of the throat — the polyphenols announcing themselves.</p></article>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section class="shop" id="shop">
+      <p class="chapter__num mono" data-scramble>The bottles</p>
+      <h2 data-split><span class="line">Three pressings,</span><span class="line"><em>one hillside.</em></span></h2>
+      <div class="shop__grid">
+        <article class="sku" data-reveal data-tilt>
+          <div class="sku__bottle sku__bottle--verde"></div>
+          <h3>Verde</h3><p class="mono">Everyday · 500 ml</p>
+          <p>The workhorse. Salads, bread, everything.</p>
+          <div class="sku__row"><span class="sku__price">€18</span><button class="btn" type="button" data-add data-magnetic>Join the list</button></div>
+        </article>
+        <article class="sku sku--hero" data-reveal data-tilt>
+          <span class="sku__tag mono">Most loved</span>
+          <div class="sku__bottle sku__bottle--oro"></div>
+          <h3>Oro</h3><p class="mono">Reserve · 500 ml</p>
+          <p>The best rows of the harvest, bottled apart.</p>
+          <div class="sku__row"><span class="sku__price">€29</span><button class="btn" type="button" data-add data-magnetic>Join the list</button></div>
+        </article>
+        <article class="sku" data-reveal data-tilt>
+          <div class="sku__bottle sku__bottle--prima"></div>
+          <h3>Prima</h3><p class="mono">First press · 250 ml</p>
+          <p>Day-one oil. Cloudy, loud, gone by spring.</p>
+          <div class="sku__row"><span class="sku__price">€24</span><button class="btn" type="button" data-add data-magnetic>Join the list</button></div>
+        </article>
+      </div>
+      <p class="shop__note mono" data-reveal>Shipping from the estate · October 2026</p>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__word" id="footWord">VERDOR</div>
+      <div class="footer__cols mono">
+        <span>Single estate · Cold-pressed</span>
+        <span>© MMXXVI Verdor Estate</span>
+      </div>
+      <p class="footer__credit mono">Designed &amp; built by <a href="https://kookyweb.vercel.app" target="_blank" rel="noopener">kookyweb</a></p>
+    </footer>
+  </main>
+
+  <div class="toast mono" id="toast">You're on the list ✓</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="fx.js"></script>
+  <script src="main.js"></script>
+  <script type="module" src="webgl.js"></script>
+</body>
+</html>
