@@ -19,8 +19,8 @@
     lenis.stop();
   }
 
-  FX.cursor();
-  FX.progress();
+  FX.cursor("drop");
+  FX.progress("line-v");
   FX.magnetic("[data-magnetic]");
 
   /* toast */
@@ -77,7 +77,18 @@
 
   /* ---------- hero intro (plays as the loader curtain lifts) ---------- */
   var heroChars = FX.charRise(document.getElementById("heroTitle"), { trigger: false, stagger: 0.035, duration: 1.3 });
-  FX.preloader(glReady).then(function () {
+  var liquid = document.getElementById("lvLiquid");
+  FX.preloader(glReady, {
+    format: function (p) { return Math.round(p * 100); },
+    onProgress: function (p) { liquid.setAttribute("transform", "translate(0 " + (300 - p * 300).toFixed(1) + ")"); },
+    exit: function (tl, el, resolve) {
+      // the full bottle swells until its gold floods the screen, then the estate appears
+      tl.to("#lvBottle", { scale: 1.08, duration: 0.35, ease: "power2.out" })
+        .to("#lvBottle", { scale: 46, duration: 1.1, ease: "expo.in" })
+        .add(resolve, "-=0.3")
+        .to(el, { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.15");
+    }
+  }).then(function () {
     document.documentElement.classList.remove("is-loading");
     lenis && lenis.start();
     document.getElementById("nav").classList.add("is-in");
@@ -102,7 +113,18 @@
   /* ---------- text & image reveals ---------- */
   gsap.utils.toArray("[data-split]").forEach(function (h) { FX.charRise(h, { start: "top 86%" }); });
   FX.charRise(document.querySelector(".pour__title"), { start: "top 75%", stagger: 0.03 });
-  FX.charRise(document.getElementById("footWord"), { start: "top 92%", stagger: 0.06, duration: 1.4 });
+  FX.charRise(document.getElementById("footSign"), { start: "top 90%", stagger: 0.03, duration: 1.2 });
+
+  /* footer olive branch draws itself, leaves unfurl, olives drop in */
+  var stem = document.querySelector(".br-stem");
+  if (stem) {
+    var len = stem.getTotalLength();
+    gsap.set(stem, { strokeDasharray: len, strokeDashoffset: len });
+    var btl = gsap.timeline({ scrollTrigger: { trigger: ".footer__branch", start: "top bottom", end: "bottom 94%", scrub: 0.6 } });
+    btl.to(stem, { strokeDashoffset: 0, ease: "none", duration: 1 })
+      .from(".br-leaves path", { scale: 0, rotation: -30, stagger: 0.08, ease: "back.out(2)", duration: 0.4 }, 0.1)
+      .from(".br-olives ellipse", { y: -30, opacity: 0, stagger: 0.12, ease: "bounce.out", duration: 0.4 }, 0.5);
+  }
   FX.scrambleOnScroll("[data-scramble]");
   FX.clipReveals("[data-clip]");
 
